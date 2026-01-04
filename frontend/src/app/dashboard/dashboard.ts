@@ -1,8 +1,9 @@
-import { Component, signal, OnInit } from '@angular/core';
+import { Component, signal, OnInit, computed } from '@angular/core';
 import { ContestService } from '../service/contest.service';
 import { ContestModel } from '../contest.model';
 import { map } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +12,7 @@ import { DatePipe } from '@angular/common';
   providers: [DatePipe]
 })
 export class Dashboard implements OnInit {
+
   ngOnInit() : void {
     const contestsData = localStorage.getItem('contests');
     this.startDate= new Date().toISOString().split('T')[0];
@@ -18,23 +20,29 @@ export class Dashboard implements OnInit {
     futureDay.setDate(futureDay.getDate()+30);
     this.endDate = futureDay.toISOString().split('T')[0];
     if (contestsData) {
-      if (JSON.parse(contestsData)[0].fetchedDate !== new Date().toISOString().split('T')[0]) {
+      if (this.parseDate(JSON.parse(contestsData)[0].fetchedDate) !== this.parseDate(new Date().toISOString())) {
         this.refreshData();
       }
       else {
         this.contests.set(JSON.parse(contestsData));
+        this.filteredContests.set(
+          this.contests()
+      .filter(c => c.start >= c.fetchedDate)
+      .slice(0, 5));
       }
     }
     else{
       this.refreshData();
     }
   }
+
   startDate: string = '';
   endDate: string = '';
   contests = signal<ContestModel[]>([]);
+  filteredContests = signal<ContestModel[]>([]);
   error: string = '';
   isDataCached = false;
-  constructor(private contestService: ContestService, private datePipe : DatePipe) { }
+  constructor(private contestService: ContestService, private datePipe : DatePipe, private router: Router) { }
 
   platforms: string[] = [
     'codeforces.com',
@@ -44,6 +52,7 @@ export class Dashboard implements OnInit {
     'topcoder.com',
     'hackerrank.com',
   ];
+
 
   refreshData() {
     this.contestService
@@ -61,5 +70,14 @@ export class Dashboard implements OnInit {
           this.error = '';
         }
       });
+  }
+
+  private parseDate(utc: string): number {
+    const d = new Date(utc);
+    d.setHours(0, 0, 0, 0);
+    return d.getTime();
+  }
+  viewAll(){
+    this.router.navigate(['/contests']);
   }
 }

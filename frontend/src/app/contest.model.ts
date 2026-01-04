@@ -14,8 +14,8 @@ export interface ApiContest {
 export interface ContestModel {
   id: string;
   event: string;
-  start: string | null;
-  end: string | null;
+  start: string;
+  end: string;
   duration: number;
   href: string;
   resource: {

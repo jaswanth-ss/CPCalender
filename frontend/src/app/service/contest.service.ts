@@ -34,21 +34,21 @@ export class ContestService {
             (item: any): ContestModel => ({
               id: String(item.id),
               event: item.event,
-              start: this.utcToIST(item.start),
-              end: this.utcToIST(item.end),
+              start: this.apiutcToIST(item.start),
+              end: this.apiutcToIST(item.end),
               duration: item.duration,
               href: item.href,
               resource: {
                 id: item.resource_id,
                 name: item.resource,
               },
-              fetchedDate: new Date().toISOString().split('T')[0],
+              fetchedDate: this.utcToIST(new Date().toISOString()),
             })
           )
         )
       );
   }
-  private utcToIST(utc: string): string {
+  private apiutcToIST(utc: string): string {
     return new Date(utc+'Z').toLocaleString('en-IN', {
       timeZone: 'Asia/Kolkata',
       year: 'numeric',
@@ -60,4 +60,15 @@ export class ContestService {
     });
   }
 
+  private utcToIST(utc: string): string {
+    return new Date(utc).toLocaleString('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+    });
+  }
 }

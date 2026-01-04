@@ -15,9 +15,11 @@
     <div class="upcomingContests">
         <div class="section-header">
             <h2 class="section-title">Upcoming Contests</h2>
-            <button class="refreshBtn" (click)="refreshData()">Refresh</button>
+            <div class="btns">
+                <button class="viewAllBtn" (click)="viewAll()">View All</button>
+                <button class="refreshBtn" (click)="refreshData()">Refresh</button>
+            </div>
         </div>
-
         @if(error){
         <div class="error-container">
             <p class="error-message">{{ error }}</p>
@@ -43,10 +45,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for(contest of contests().slice(0, 5);; track contest.id; let i = $index){
-                        <tr>
+                    @for(contest of filteredContests(); track contest.id; let i = $index){
+                            <tr>
                             <td class="sno"> {{ i+1 }}</td>
-                            <td class="contest-name">{{ contest.event }}</td>
+                            <td class="contest-name"> <a [href]="contest.href">{{ contest.event }}</a></td>
                             <td class="contest-platform">{{ contest.resource.name.split('.')[0] }}</td>
                             <td class="contest-time">{{ contest.start }}</td>
                             <td class="contest-duration">{{ contest.duration/60 }} min</td>
