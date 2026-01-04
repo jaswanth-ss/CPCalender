@@ -13,11 +13,11 @@ import { Router } from '@angular/router';
 })
 export class Dashboard implements OnInit {
 
-  ngOnInit() : void {
+  ngOnInit(): void {
     const contestsData = localStorage.getItem('contests');
-    this.startDate= new Date().toISOString().split('T')[0];
+    this.startDate = new Date().toISOString().split('T')[0];
     const futureDay = new Date();
-    futureDay.setDate(futureDay.getDate()+30);
+    futureDay.setDate(futureDay.getDate() + 30);
     this.endDate = futureDay.toISOString().split('T')[0];
     if (contestsData) {
       if (this.parseDate(JSON.parse(contestsData)[0].fetchedDate) !== this.parseDate(new Date().toISOString())) {
@@ -27,11 +27,11 @@ export class Dashboard implements OnInit {
         this.contests.set(JSON.parse(contestsData));
         this.filteredContests.set(
           this.contests()
-      .filter(c => c.start >= c.fetchedDate)
-      .slice(0, 5));
+            .filter(c => c.start >= c.fetchedDate)
+            .slice(0, 5));
       }
     }
-    else{
+    else {
       this.refreshData();
     }
   }
@@ -42,7 +42,7 @@ export class Dashboard implements OnInit {
   filteredContests = signal<ContestModel[]>([]);
   error: string = '';
   isDataCached = false;
-  constructor(private contestService: ContestService, private datePipe : DatePipe, private router: Router) { }
+  constructor(private contestService: ContestService, private datePipe: DatePipe, private router: Router) { }
 
   platforms: string[] = [
     'codeforces.com',
@@ -63,6 +63,10 @@ export class Dashboard implements OnInit {
       })
       .subscribe(data => {
         this.contests.set(data);
+        this.filteredContests.set(
+          this.contests()
+            .filter(c => c.start >= c.fetchedDate)
+            .slice(0, 5));
         try {
           localStorage.removeItem('contests');
           localStorage.setItem('contests', JSON.stringify(this.contests()));
@@ -77,7 +81,7 @@ export class Dashboard implements OnInit {
     d.setHours(0, 0, 0, 0);
     return d.getTime();
   }
-  viewAll(){
+  viewAll() {
     this.router.navigate(['/contests']);
   }
 }
