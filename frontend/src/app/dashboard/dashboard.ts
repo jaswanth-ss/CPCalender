@@ -25,6 +25,9 @@ export class Dashboard implements OnInit {
         this.contests.set(JSON.parse(contestsData));
       }
     }
+    else{
+      this.refreshData();
+    }
   }
   startDate: string = '';
   endDate: string = '';
