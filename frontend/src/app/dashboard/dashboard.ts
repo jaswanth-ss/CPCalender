@@ -27,7 +27,7 @@ export class Dashboard implements OnInit {
         this.contests.set(JSON.parse(contestsData));
         this.filteredContests.set(
           this.contests()
-            .filter(c => c.start >= c.fetchedDate)
+            .filter(c => this.compareTime(c.start) >= this.compareTime(c.fetchedDate))
             .slice(0, 5));
       }
     }
@@ -81,6 +81,12 @@ export class Dashboard implements OnInit {
     d.setHours(0, 0, 0, 0);
     return d.getTime();
   }
+
+  private compareTime(time:string) : number{
+    const t = new Date(time);
+    return t.getTime();
+  }
+
   viewAll() {
     this.router.navigate(['/contests']);
   }
