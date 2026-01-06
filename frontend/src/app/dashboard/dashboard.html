@@ -26,6 +26,11 @@
             <button class="retryBtn">Retry</button>
         </div>
         }
+        @else if(!isDataCached()){
+            <div class="empty-container">
+            <p class="empty-text">Loading Contests...</p>
+        </div>
+        }
         @else if(contests().length == 0){
         <div class="empty-container">
             <p class="empty-text">No upcoming contests found. Please Try Again.</p>

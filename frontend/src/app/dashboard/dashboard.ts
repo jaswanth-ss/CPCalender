@@ -21,9 +21,11 @@ export class Dashboard implements OnInit {
     this.endDate = futureDay.toISOString().split('T')[0];
     if (contestsData) {
       if (this.parseDate(JSON.parse(contestsData)[0].fetchedDate) !== this.parseDate(new Date().toISOString())) {
+        this.isDataCached.set(false);
         this.refreshData();
       }
       else {
+        this.isDataCached.set(true);
         this.contests.set(JSON.parse(contestsData));
         this.filteredContests.set(
           this.contests()
@@ -32,16 +34,16 @@ export class Dashboard implements OnInit {
       }
     }
     else {
+      this.isDataCached.set(false);
       this.refreshData();
     }
   }
-
   startDate: string = '';
   endDate: string = '';
   contests = signal<ContestModel[]>([]);
   filteredContests = signal<ContestModel[]>([]);
   error: string = '';
-  isDataCached = false;
+  isDataCached = signal<boolean>(false);
   constructor(private contestService: ContestService, private datePipe: DatePipe, private router: Router) { }
 
   platforms: string[] = [
@@ -70,6 +72,7 @@ export class Dashboard implements OnInit {
         try {
           localStorage.removeItem('contests');
           localStorage.setItem('contests', JSON.stringify(this.contests()));
+          this.isDataCached.set(true);
         } catch (err) {
           this.error = '';
         }
