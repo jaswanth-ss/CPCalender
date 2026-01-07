@@ -57,6 +57,7 @@ export class Dashboard implements OnInit {
 
 
   refreshData() {
+    this.isDataCached.set(false);
     this.contestService
       .getContestsOnLoadService({
         platforms: this.platforms,

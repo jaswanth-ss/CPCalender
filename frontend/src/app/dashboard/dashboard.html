@@ -53,7 +53,7 @@
                     @for(contest of filteredContests(); track contest.id; let i = $index){
                             <tr>
                             <td class="sno"> {{ i+1 }}</td>
-                            <td class="contest-name"> <a [href]="contest.href">{{ contest.event }}</a></td>
+                            <td class="contest-name"> <a [href]="contest.href" target="_blank">{{ contest.event }}</a></td>
                             <td class="contest-platform">{{ contest.resource.name.split('.')[0] }}</td>
                             <td class="contest-time">{{ contest.start }}</td>
                             <td class="contest-duration">{{ contest.duration/60 }} min</td>
