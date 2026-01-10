@@ -24,3 +24,12 @@ export interface ContestModel {
   };
   fetchedDate : string;
 }
+
+export const platformsArray: string[] = [
+    'codeforces.com',
+    'codechef.com',
+    'leetcode.com',
+    'atcoder.jp',
+    'topcoder.com',
+    'hackerrank.com',
+  ];
