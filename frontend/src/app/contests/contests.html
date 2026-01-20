@@ -3,20 +3,57 @@
         <form (ngSubmit)="onSearch()">
             <div class="platformSearch" (blur)="dropDown = false">
                 <label for="platform">Platform</label>
-                <input type="text" name="platform" id="platform"
-                [(ngModel)]="searchInput" (input)="onInput()" (focus)="dropDown = true">
+                <input type="text" name="platform" id="platform" [(ngModel)]="searchInput" (input)="onInput()"
+                    (focus)="dropDown = true">
                 @if (dropDown) {
-                    <ul>
-                        @for (platform of filteredPlatforms; track $index) {
-                            <li (click)="selectOption(platform)">{{ platform }}</li>
-                        }
-                    </ul>
+                <ul>
+                    @for (platform of filteredPlatforms; track $index) {
+                    <li (click)="selectOption(platform)">{{ platform }}</li>
+                    }
+                </ul>
                 }
-           </div>
+            </div>
             <label for="startDate">Start Date</label>
-            <input type="date" name="startDate" id="startDate">
+            <input type="date" name="startDate" id="startDate" [(ngModel)]="startDate">
             <label for="endDate">End Date</label>
-            <input type="date" name="endDate" id="endDate">
+            <input type="date" name="endDate" id="endDate" [(ngModel)]="endDate">
+            <button type="submit">Search</button>
         </form>
+    </div>
+    <div class="upcoming-container">
+
+        @if(contests().length > 0){
+        <table class="contests-table">
+            <thead>
+                <tr>
+                    <th>S. No</th>
+                    <th>Contest Name</th>
+                    <th>Platform</th>
+                    <th>Start Time</th>
+                    <th>Duration</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(contest of contests(); track contest.id; let i = $index){
+                <tr>
+                    <td class="sno"> {{ i+1 }}</td>
+                    <td class="contest-name"> <a [href]="contest.href" target="_blank">{{ contest.event }}</a></td>
+                    <td class="contest-platform">{{ contest.resource.name.split('.')[0] }}</td>
+                    <td class="contest-time">{{ contest.start }}</td>
+                    <td class="contest-duration">{{ contest.duration/60 }} min</td>
+                    <td class="add-calender">Add To Calender</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+        @else if(isLoading){
+            <p>Loading Contests</p>
+        }
+        @else{
+            <p>Please search for contests to add to calender</p>
+        }
+
     </div>
 </div>

@@ -15,10 +15,8 @@ export class Dashboard implements OnInit {
 
   ngOnInit(): void {
     const contestsData = localStorage.getItem('contests');
-    this.startDate = new Date().toISOString().split('T')[0];
-    const futureDay = new Date();
-    futureDay.setDate(futureDay.getDate() + 30);
-    this.endDate = futureDay.toISOString().split('T')[0];
+    this.startDate = this.contestService.getStartDate();
+    this.endDate = this.contestService.getEndDate(30);
     if (contestsData) {
       if (this.parseDate(JSON.parse(contestsData)[0].fetchedDate) !== this.parseDate(new Date().toISOString())) {
         this.isDataCached.set(false);
@@ -72,7 +70,7 @@ export class Dashboard implements OnInit {
       });
   }
 
-  private parseDate(utc: string): number {
+   parseDate(utc: string): number {
     const d = new Date(utc);
     d.setHours(0, 0, 0, 0);
     return d.getTime();

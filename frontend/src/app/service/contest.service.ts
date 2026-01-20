@@ -27,7 +27,7 @@ export class ContestService {
     if (params.to) {
       httpParams = httpParams.set('to', params.to);
     }
-
+    console.log(params.from, params.to);
     return this.http.get<any>(this.apiUrl, {params : httpParams}).pipe(
         map(res =>
           res.objects.map(
@@ -48,6 +48,16 @@ export class ContestService {
         )
       );
   }
+
+  getStartDate(){
+    return new Date().toISOString().split('T')[0];
+  }
+
+  getEndDate(days : number, futureDay : Date = new Date()){
+    futureDay.setDate(futureDay.getDate() + days + 1);
+    return futureDay.toISOString().split('T')[0];
+  }
+
   private apiutcToIST(utc: string): string {
     return new Date(utc+'Z').toLocaleString('en-IN', {
       timeZone: 'Asia/Kolkata',
