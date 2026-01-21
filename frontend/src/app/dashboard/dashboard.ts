@@ -1,7 +1,6 @@
 import { Component, signal, OnInit, computed } from '@angular/core';
 import { ContestService } from '../service/contest.service';
 import { ContestModel, platformsArray } from '../contest.model';
-import { map } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 
