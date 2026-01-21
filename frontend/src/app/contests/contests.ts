@@ -5,7 +5,7 @@ import { ContestService } from '../service/contest.service';
 
 @Component({
   selector: 'app-contests',
-  imports: [FormsModule],
+  imports: [],
   templateUrl: './contests.html',
   styleUrl: './contests.css',
 })

@@ -1,6 +1,6 @@
 import { Component, signal, OnInit, computed } from '@angular/core';
 import { ContestService } from '../service/contest.service';
-import { ContestModel, platformsArray } from '../contest.model';
+import { ContestModel } from '../contest.model';
 import { map } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
@@ -42,9 +42,17 @@ export class Dashboard implements OnInit {
   filteredContests = signal<ContestModel[]>([]);
   error: string = '';
   isDataCached = signal<boolean>(false);
-  platforms:string[] = platformsArray 
-  
   constructor(private contestService: ContestService, private datePipe: DatePipe, private router: Router) { }
+
+  platforms: string[] = [
+    'codeforces.com',
+    'codechef.com',
+    'leetcode.com',
+    'atcoder.jp',
+    'topcoder.com',
+    'hackerrank.com',
+  ];
+
 
   refreshData() {
     this.isDataCached.set(false);
@@ -58,7 +66,7 @@ export class Dashboard implements OnInit {
         this.contests.set(data);
         this.filteredContests.set(
           this.contests()
-            .filter(c => this.compareTime(c.start) >= this.compareTime(c.fetchedDate))
+            .filter(c => c.start >= c.fetchedDate)
             .slice(0, 5));
         try {
           localStorage.removeItem('contests');
