@@ -1,3 +1,7 @@
 label,p,li{
     color: white;
 }
+
+.platform-li{
+    text-decoration: none;
+}

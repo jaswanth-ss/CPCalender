@@ -19,28 +19,28 @@ export class Contests {
   endDate: string = '';
   dropDown: boolean = false;
   contests = signal<ContestModel[]>([]);
-  isLoading: boolean = false;
+  isLoading = signal<boolean>(false);
   cachedContests = localStorage.getItem('contests');
 
   onSearch() {
     this.contests.set([]);
-    alert(this.startDate > this.contestService.getStartDate())
     if (this.startDate >= this.contestService.getStartDate() && this.endDate <= this.contestService.getEndDate(30)) {
       if(this.cachedContests){
          this.contests.set(
-        JSON.parse(this.cachedContests).filter((c: { startDate: string; endDate: string; }) => c.startDate >= this.startDate && c.endDate <= this.endDate)
+        JSON.parse(this.cachedContests).filter((c: { start: string; end: string; }) => this.parseTime(c.start) >= this.parseTime(this.startDate) && this.parseTime(c.end) <= this.parseTime(this.endDate))
       )
       }
     }
     else {
-      this.isLoading = true;
+      this.isLoading.set(true);
       this.contestService.getContestsOnLoadService({
         platforms: this.selectedPlatforms,
         from: this.startDate,
         to: this.contestService.getEndDate(1, new Date(`${this.endDate}T00:00:00`))
       }).subscribe(data => {
-        this.isLoading = false;
+        this.isLoading.set(false);
         this.contests.set(data);
+        this.selectedPlatforms = [];
       });
     }
   }
@@ -71,6 +71,12 @@ export class Contests {
   parseDate(utc: string): string {
     const d = new Date(utc).toISOString().split('T')[0];
     return d;
+  }
+
+  parseTime(date:string) :number{
+    const d = new Date(date)
+     d.setHours(0, 0, 0, 0);
+    return d.getTime();
   }
 
 

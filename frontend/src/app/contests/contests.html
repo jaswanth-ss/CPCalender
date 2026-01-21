@@ -8,7 +8,8 @@
                 @if (dropDown) {
                 <ul>
                     @for (platform of filteredPlatforms; track $index) {
-                    <li (click)="selectOption(platform)">{{ platform }}</li>
+                        <input type="checkbox" (click)="selectOption(platform)">
+                        <label for="platform">{{ platform }}</label>
                     }
                 </ul>
                 }
@@ -48,7 +49,7 @@
             </tbody>
         </table>
         }
-        @else if(isLoading){
+        @else if(isLoading()){
             <p>Loading Contests</p>
         }
         @else{
