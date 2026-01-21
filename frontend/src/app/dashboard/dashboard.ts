@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrl: './dashboard.css',
   providers: [DatePipe]
 })
+
 export class Dashboard implements OnInit {
 
   ngOnInit(): void {
