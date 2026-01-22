@@ -6,12 +6,14 @@
                 <input type="text" name="platform" id="platform" [(ngModel)]="searchInput" (input)="onInput()"
                     (focus)="dropDown = true">
                 @if (dropDown) {
-                <ul>
+                <div class="platformOptions">
                     @for (platform of filteredPlatforms; track $index) {
-                        <input type="checkbox" (click)="selectOption(platform)">
-                        <label for="platform">{{ platform }}</label>
+                    <div class="options">
+                        <input class="platformInp" type="checkbox" (click)="selectOption(platform)">
+                        <label class="platformLabel" for="platform">{{ platform }}</label>
+                    </div>
                     }
-                </ul>
+                </div>
                 }
             </div>
             <label for="startDate">Start Date</label>
@@ -50,10 +52,10 @@
         </table>
         }
         @else if(isLoading()){
-            <p>Loading Contests</p>
+        <p>Loading Contests</p>
         }
         @else{
-            <p>Please search for contests to add to calender</p>
+        <p>Please search for contests to add to calender</p>
         }
 
     </div>

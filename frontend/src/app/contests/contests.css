@@ -1,7 +1,8 @@
-label,p,li{
+label,p{
     color: white;
 }
 
-.platform-li{
-    text-decoration: none;
+.platformOptions{
+    display: flex;
+    flex-direction: column;
 }

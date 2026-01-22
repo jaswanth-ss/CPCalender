@@ -21,14 +21,20 @@ export class Contests {
   contests = signal<ContestModel[]>([]);
   isLoading = signal<boolean>(false);
   cachedContests = localStorage.getItem('contests');
+  filteredCachedContest = signal<ContestModel[]>([]);
 
   onSearch() {
     this.contests.set([]);
     if (this.startDate >= this.contestService.getStartDate() && this.endDate <= this.contestService.getEndDate(30)) {
-      if(this.cachedContests){
-         this.contests.set(
-        JSON.parse(this.cachedContests).filter((c: { start: string; end: string; }) => this.parseTime(c.start) >= this.parseTime(this.startDate) && this.parseTime(c.end) <= this.parseTime(this.endDate))
-      )
+      if (this.cachedContests) {
+        const contests = JSON.parse(this.cachedContests);
+        for (const platform of this.selectedPlatforms) {
+          this.filteredCachedContest.update(arr => [...arr, ...contests.filter((c: { resource: { name: string } }) => c.resource.name == platform)
+          ]);
+        }
+        this.contests.set(
+          this.filteredCachedContest().filter((c: { start: string; end: string; }) => this.parseTime(c.start) >= this.parseTime(this.startDate) && this.parseTime(c.end) <= this.parseTime(this.endDate))
+        )
       }
     }
     else {
@@ -73,9 +79,9 @@ export class Contests {
     return d;
   }
 
-  parseTime(date:string) :number{
+  parseTime(date: string): number {
     const d = new Date(date)
-     d.setHours(0, 0, 0, 0);
+    d.setHours(0, 0, 0, 0);
     return d.getTime();
   }
 
