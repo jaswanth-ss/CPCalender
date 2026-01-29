@@ -8,8 +8,8 @@
                 @if (dropDown) {
                 <div class="platformOptions">
                     @for (platform of filteredPlatforms; track $index) {
-                    <div class="options">
-                        <input class="platformInp" type="checkbox" (click)="selectOption(platform)">
+                    <div class="options" (click)="selectOption(platform)">
+                        <input class="platform-{{platform}}" type="checkbox">
                         <label class="platformLabel" for="platform">{{ platform }}</label>
                     </div>
                     }
@@ -19,7 +19,9 @@
             <label for="startDate">Start Date</label>
             <input type="date" name="startDate" id="startDate" [(ngModel)]="startDate">
             <label for="endDate">End Date</label>
-            <input type="date" name="endDate" id="endDate" [(ngModel)]="endDate">
+            <input type="date" name="endDate" id="endDate" [(ngModel)]="endDate"
+             [disabled]="startDate === ''"
+             [min] = "startDate">
             <button type="submit">Search</button>
         </form>
     </div>

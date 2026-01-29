@@ -2,6 +2,7 @@ import { Component, HostListener, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ContestModel, platformsArray } from '../contest.model';
 import { ContestService } from '../service/contest.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-contests',
@@ -24,6 +25,15 @@ export class Contests {
   filteredCachedContest = signal<ContestModel[]>([]);
 
   onSearch() {
+    if(this.parseTime(this.startDate) >= this.parseTime(this.endDate)){
+      alert("Please select correct start date and end date");
+      this.contests.set([]);
+      return;
+    }
+    this.filteredCachedContest.set([]);
+    if(this.selectedPlatforms.length == 0){
+      this.selectedPlatforms = this.platforms.map(x => x + '.com');
+    }
     this.contests.set([]);
     if (this.startDate >= this.contestService.getStartDate() && this.endDate <= this.contestService.getEndDate(30)) {
       if (this.cachedContests) {
@@ -49,6 +59,7 @@ export class Contests {
         this.selectedPlatforms = [];
       });
     }
+    this.selectedPlatforms = [];
   }
 
   onInput() {
@@ -57,6 +68,10 @@ export class Contests {
 
   selectOption(option: string) {
     const index = this.selectedPlatforms.indexOf(option + ".com");
+    const checkbox = document.getElementsByClassName('platform-'+option)[0] as HTMLInputElement | null;
+    if(checkbox){
+      checkbox.checked = !checkbox.checked;
+    }
     if (index === -1) {
       this.selectedPlatforms.push(option + ".com");
     }

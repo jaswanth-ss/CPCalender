@@ -27,7 +27,8 @@ export class ContestService {
     if (params.to) {
       httpParams = httpParams.set('to', params.to);
     }
-    console.log(params.from, params.to);
+
+    console.log(params.platforms, params.from, params.to);
     return this.http.get<any>(this.apiUrl, {params : httpParams}).pipe(
         map(res =>
           res.objects.map(
