@@ -1,11 +1,23 @@
 <div class="container">
     <div class="search">
-        <form (ngSubmit)="onSearch()">
+        <form (ngSubmit)="onSearch()" class="formInp">
             <div class="platformSearch" (blur)="dropDown = false">
                 <label for="platform">Platform</label>
                 <input type="text" name="platform" id="platform" [(ngModel)]="searchInput" (input)="onInput()"
-                    (focus)="dropDown = true">
-                @if (dropDown) {
+                    (focus)="dropDown = true" autocomplete="off">
+            </div>
+            <div class="dateSelect">
+                <label for="startDate">Start Date</label>
+                <input type="date" name="startDate" id="startDate" [(ngModel)]="startDate">
+                <label for="endDate">End Date</label>
+                <input type="date" name="endDate" id="endDate" [(ngModel)]="endDate" [disabled]="startDate === ''"
+                    [min]="startDate">
+            </div>
+            
+            <button type="submit" class="search-btn">Search</button>
+        </form>
+        
+        @if (dropDown) {
                 <div class="platformOptions">
                     @for (platform of filteredPlatforms; track $index) {
                     <div class="options" (click)="selectOption(platform)">
@@ -15,15 +27,6 @@
                     }
                 </div>
                 }
-            </div>
-            <label for="startDate">Start Date</label>
-            <input type="date" name="startDate" id="startDate" [(ngModel)]="startDate">
-            <label for="endDate">End Date</label>
-            <input type="date" name="endDate" id="endDate" [(ngModel)]="endDate"
-             [disabled]="startDate === ''"
-             [min] = "startDate">
-            <button type="submit">Search</button>
-        </form>
     </div>
     <div class="upcoming-container">
 

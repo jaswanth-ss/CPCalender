@@ -6,3 +6,37 @@ label,p{
     display: flex;
     flex-direction: column;
 }
+
+.formInp{
+    padding: 2% 2% 0% 2%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-btn{
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  margin : 0rem 1rem;
+  width: auto;
+  height: 2%;
+}
+
+.search-btn:disabled {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(4px);
+  cursor: not-allowed;
+}
+
+.platformOptions{
+    display: flex;
+    flex-direction: column;
+    padding-left: 24%;
+}

@@ -25,6 +25,10 @@ export class Contests {
   filteredCachedContest = signal<ContestModel[]>([]);
 
   onSearch() {
+    if(this.startDate == '' || this.endDate == ''){
+      this.startDate = this.contestService.getStartDate();
+      this.endDate = this.contestService.getEndDate(30);
+    }
     if(this.parseTime(this.startDate) >= this.parseTime(this.endDate)){
       alert("Please select correct start date and end date");
       this.contests.set([]);
@@ -60,6 +64,7 @@ export class Contests {
       });
     }
     this.selectedPlatforms = [];
+    this.searchInput = "";
   }
 
   onInput() {
@@ -78,6 +83,7 @@ export class Contests {
     else {
       this.selectedPlatforms.splice(index, 1);
     }
+    this.searchInput = this.selectedPlatforms.map(i => i.split(".com")[0]).join(",");
   }
 
   @HostListener('document:click', ['$event'])
