@@ -36,6 +36,8 @@
   height: 18vh;
   border-top: none;
   border-right: none;
+  overflow: scroll;
+  scrollbar-width: thin;
 }
 
 .day-grid:nth-last-child(-n + 7) {
@@ -62,4 +64,23 @@
 
 .weekday:nth-child(7n+1) {
     border-left: none;
+}
+
+.event{
+    background-color: #4d4d52;
+    color: white;
+    margin: 0.75rem 0.5rem;
+    padding: 0.25rem;
+    border-radius: 0.2rem;
+    font-size: 0.7rem;
+    display: -webkit-box;
+  -webkit-line-clamp: 2;   /* number of lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.event-a{
+    color: white;
+    text-decoration: none;
 }
