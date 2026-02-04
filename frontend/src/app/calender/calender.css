@@ -37,27 +37,12 @@
   border-top: none;
   border-right: none;
   overflow: auto;
-  scrollbar-width: thin;     
-  scrollbar-color: rgb(85, 85, 85) transparent; 
+  scrollbar-width: none;     
 }
 
-.day-grid::-webkit-scrollbar-track {
-  background: transparent;   
-}
-
-.day-grid::-webkit-scrollbar-thumb {
-  background-color: black;  
-  border-radius: 3px;       
-}
 
 .day-grid::-webkit-scrollbar {
-  width: 0px;  
-  height: 0px;
-}
-
-.day-grid:hover::-webkit-scrollbar {
-  width: 6px;   
-  height: 6px;
+  display: none;
 }
 
 .day-grid:nth-last-child(-n + 7) {
@@ -90,7 +75,7 @@
     background-color: #4d4d52;
     color: white;
     margin: 0.75rem 0.5rem;
-    padding: 0.725rem;
+    padding: 0.25rem;
     border-radius: 0.25rem;
     font-size: 0.7rem;
     display: -webkit-box;
