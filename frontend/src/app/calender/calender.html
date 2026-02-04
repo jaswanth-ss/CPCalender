@@ -1,1 +1,29 @@
-<p>calender works!</p>
+<div class="calendar-container"> 
+  <div class="calender-section">
+    <div class="week-grid">
+      @for(day of calendarDayNames; track day){
+        <div class="weekday">
+          {{ day }}
+        </div>
+      }
+    </div>
+
+    <div class="days-grid">
+      @for(day of days; track day){
+        <div class="day-grid">
+          @if(day.getDate() === today.getDate()){
+            <span class="today-date day">{{ day.toLocaleDateString('en-us', { month: 'short', day: 'numeric' }) }}</span>
+          }
+          @else if(day.getMonth() !== today.getMonth()){
+            <span class="next-month day">{{ day.toLocaleDateString('en-us', { month: 'short', day: 'numeric' }) }}</span>
+          }
+          @else{
+            <span class="current-month day">{{ day.getDate() }}</span>
+          }
+
+          
+        </div>
+      }
+    </div>
+  </div>
+</div>

@@ -42,7 +42,7 @@ export class Dashboard implements OnInit {
   filteredContests = signal<ContestModel[]>([]);
   error: string = '';
   isDataCached = signal<boolean>(false);
-  platforms:string[] = platformsArray 
+  platforms:string[] = platformsArray; 
   
   constructor(private contestService: ContestService, private datePipe: DatePipe, private router: Router) { }
 
