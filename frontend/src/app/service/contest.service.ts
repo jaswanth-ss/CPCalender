@@ -14,21 +14,7 @@ export class ContestService {
     from?: string;
     to?: string;
   }):Observable<ContestModel[]>{
-    let httpParams = new HttpParams();
-
-    if (params.platforms && params.platforms.length > 0) {
-      httpParams = httpParams.set('platforms', params.platforms.join(','));
-    }
-
-    if (params.from) {
-      httpParams = httpParams.set('from', params.from);
-    }
-
-    if (params.to) {
-      httpParams = httpParams.set('to', params.to);
-    }
-
-    return this.http.get<any>(this.apiUrl, {params : httpParams}).pipe(
+    return this.http.get<any>(this.apiUrl).pipe(
         map(res =>
           res.objects.map(
             (item: any): ContestModel => ({
