@@ -18,7 +18,7 @@
             <span class="next-month day">{{ day.toLocaleDateString('en-us', { month: 'short', day: 'numeric' }) }}</span>
           }
           @else{
-            <span class="current-month day">{{ day.getDate() }}</span>
+            <span class="current-month day">{{ day.getDate() }} {{getContestsOnDate(day)[0]?.event}}</span>
           }
 
           

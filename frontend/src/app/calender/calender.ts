@@ -96,4 +96,17 @@ export class Calender {
        this.calendarDayNames.push(this.dayNames[todayNameInd + i]);
     }
   }
+
+  getContestsOnDate(date : Date): ContestModel[] {
+    const istDate = this.contestService.toIST(date);
+    const contestsOnDate = this.contestData().filter(contest => this.compareTime(contest.start) === this.compareTime(istDate));
+    return contestsOnDate;
+  }
+
+  private compareTime(time:string) : number{
+    const t = new Date(time);
+   t.setHours(0, 0, 0, 0);
+    return t.getTime();
+  }
+
 }
