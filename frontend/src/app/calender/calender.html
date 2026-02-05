@@ -21,11 +21,20 @@
             <span class="current-month day">{{ day.getDate() }}</span>
           }
           @for(event of getContestsOnDate(day); track event){
-            <a class="event-a" [href]="event.href" target="_blank"><div class="event">{{ event.event }}</div></a>
-          }
+              <a class="event-a" [href]="event.href" target="_blank"><div class="event platform-{{event.resource.name.split('.')[0]}}">{{ event.event }}</div></a>
+            }
           
         </div>
       }
     </div>
   </div>
+
+  <div class="legend-section">
+    <div class="legend-items">
+      @for(platform of platforms; track platform){
+        <span class="legend-item platform-{{platform.split('.')[0]}}">
+          {{ platform.split('.')[0] }}
+        </span>
+      }
+    </div>
 </div>

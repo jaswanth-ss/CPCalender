@@ -89,3 +89,29 @@
     color: white;
     text-decoration: none;
 }
+
+.platform-codeforces{
+    background-color: #1e8fffc7;
+}
+
+.platform-codechef{
+    background-color: #9f451a;
+}
+
+.platform-leetcode{
+    background-color: #e79f33;
+    color: #000;
+}
+
+.platform-atcoder{
+    background-color: #090909;
+    color: #fff;
+}
+
+.platform-topcoder{
+    background-color: #123b63;
+}
+
+.platform-hackerrank{
+    background-color: #2ea44f;
+}

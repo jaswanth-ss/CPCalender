@@ -3,6 +3,7 @@ import { Contests } from '../contests/contests';
 import { ContestService } from '../service/contest.service';
 import { ContestModel, platformsArray } from '../contest.model';
 
+
 @Component({
   selector: 'app-calender',
   imports: [],
