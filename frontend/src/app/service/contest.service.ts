@@ -8,7 +8,7 @@ import { ContestModel } from '../contest.model';
 })
 export class ContestService {
   private http = inject(HttpClient);
-  private apiUrl = 'https://cp-calender-fydpa5chgkhdb4dz.southindia-01.azurewebsites.net/api/getcontests';
+  private apiUrl = 'https://cpcalendar-fxexcdfbanbzhufc.southindia-01.azurewebsites.net/api/getcontestsfromblob';
   getContestsOnLoadService(params: {
     platforms?: string[];
     from?: string;

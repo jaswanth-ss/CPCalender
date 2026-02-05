@@ -8,7 +8,7 @@ public class GetContests
 {
     private readonly HttpClient _httpClient = new();
 
-    [Function("GetContests")]
+    [Function("GetContestsFromBlob")]
     public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req, FunctionContext executionContext)
     {

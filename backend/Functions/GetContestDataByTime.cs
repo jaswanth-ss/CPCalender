@@ -18,7 +18,7 @@ public class GetContestDataByTime
     }
 
     [Function("GetContestDataByTime")]
-    public async Task Run([TimerTrigger("0 0 0 * * *")] TimerInfo myTimer)
+    public async Task Run([TimerTrigger("0 37 6 * * *")] TimerInfo myTimer)
     {
         _logger.LogInformation("C# Timer trigger function execution started at: {executionTime}", DateTime.Now);
         string platforms = "codeforces.com,codechef.com,leetcode.com,atcoder.jp,topcoder.com,hackerrank.com";

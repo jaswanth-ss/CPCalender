@@ -36,7 +36,7 @@ export class Contests {
     }
     this.filteredCachedContest.set([]);
     if(this.selectedPlatforms.length == 0){
-      this.selectedPlatforms = this.platforms.map(x => x + '.com');
+      this.selectedPlatforms = this.platforms.map(x => x + '.com' || x + '.jp');
     }
     this.contests.set([]);
     if (this.startDate >= this.contestService.getStartDate() && this.endDate <= this.contestService.getEndDate(30)) {
@@ -72,18 +72,24 @@ export class Contests {
   }
 
   selectOption(option: string) {
-    const index = this.selectedPlatforms.indexOf(option + ".com");
+    const index = this.selectedPlatforms.indexOf(option + ".com") == -1 ? this.selectedPlatforms.indexOf(option + ".jp") : this.selectedPlatforms.indexOf(option + ".com");
     const checkbox = document.getElementsByClassName('platform-'+option)[0] as HTMLInputElement | null;
     if(checkbox){
       checkbox.checked = !checkbox.checked;
     }
     if (index === -1) {
-      this.selectedPlatforms.push(option + ".com");
+      if(option == "atcoder"){
+        this.selectedPlatforms.push(option + ".jp");
+      }
+      else{
+         this.selectedPlatforms.push(option + ".com");
+      }
+     
     }
     else {
       this.selectedPlatforms.splice(index, 1);
     }
-    this.searchInput = this.selectedPlatforms.map(i => i.split(".com")[0]).join(",");
+    this.searchInput = this.selectedPlatforms.map(i => i.split(".")[0]).join(",");
   }
 
   @HostListener('document:click', ['$event'])
