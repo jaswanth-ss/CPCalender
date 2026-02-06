@@ -115,3 +115,20 @@
 .platform-hackerrank{
     background-color: #2ea44f;
 }
+
+.legend-items{
+    display: flex;
+    flex-direction: row;
+}
+
+.legend-item {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+}
+
+.legend{
+    display: flex;
+    margin: 2%;
+}

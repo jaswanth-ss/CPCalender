@@ -32,9 +32,11 @@
   <div class="legend-section">
     <div class="legend-items">
       @for(platform of platforms; track platform){
-        <span class="legend-item platform-{{platform.split('.')[0]}}">
-          {{ platform.split('.')[0] }}
-        </span>
+        <div class="legend">
+          <div class="legend-item platform-{{platform.split('.')[0]}}">
+        </div>
+        <div class="legend-label">{{ platform.split('.')[0] }}</div>
+        </div>
       }
     </div>
 </div>
