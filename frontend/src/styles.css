@@ -1,5 +1,5 @@
 html, body{
-  background-color: #161616a5; 
+  background-color: #000000; 
   min-height: 100vh;
   margin: 0;
   font-family: 'Inter', sans-serif;
@@ -60,7 +60,7 @@ html, body{
   font-size: 0.85rem;
 }
 
-.add-calender {
+.add-calendar {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -79,7 +79,7 @@ html, body{
   transition: background 0.2s ease;
 }
 
-.add-calender:hover {
+.add-calendar:hover {
   background: rgba(255, 255, 255, 0.22);
 }
 

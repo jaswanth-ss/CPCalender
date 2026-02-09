@@ -5,12 +5,12 @@ import { ContestModel, platformsArray } from '../contest.model';
 
 
 @Component({
-  selector: 'app-calender',
+  selector: 'app-calendar',
   imports: [],
-  templateUrl: './calender.html',
-  styleUrl: './calender.css',
+  templateUrl: './calendar.html',
+  styleUrl: './calendar.css',
 })
-export class Calender {
+export class calendar {
   constructor(private contestService: ContestService) { }
 
   error: string = '';

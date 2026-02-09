@@ -1,44 +1,53 @@
+<div class="heading">
+    <p class="contest-subheading">Search for upcoming coding contests</p>
+</div>
 <div class="container">
     <div class="search">
         <form (ngSubmit)="onSearch()" class="formInp">
             <div class="platformSearch" (blur)="dropDown = false">
-                <label for="platform">Platform</label>
-                <input type="text" name="platform" id="platform" [(ngModel)]="searchInput" (input)="onInput()"
-                    (focus)="dropDown = true" autocomplete="off">
+                <div class="searchInp">
+                    <label for="platform">PLATFORM</label>
+                    <input type="text" name="platform" id="platform" [(ngModel)]="searchInput" (input)="onInput()"
+                        (focus)="dropDown = true" autocomplete="off" placeholder="Type to filter">
+                </div>
             </div>
+
             <div class="dateSelect">
-                <label for="startDate">Start Date</label>
-                <input type="date" name="startDate" id="startDate" [(ngModel)]="startDate">
-                <label for="endDate">End Date</label>
-                <input type="date" name="endDate" id="endDate" [(ngModel)]="endDate" [disabled]="startDate === ''"
-                    [min]="startDate">
+                <div class="searchInp">
+                    <label for="startDate">START DATE</label>
+                    <input type="date" name="startDate" id="startDate" [(ngModel)]="startDate">
+                </div>
+                <div class="searchInp">
+                    <label for="endDate">END DATE</label>
+                    <input type="date" name="endDate" id="endDate" [(ngModel)]="endDate" [disabled]="startDate === ''"
+                        [min]="startDate">
+                </div>
             </div>
-            
+
             <button type="submit" class="search-btn">Search</button>
         </form>
-        
-        @if (dropDown) {
-                <div class="platformOptions">
-                    @for (platform of filteredPlatforms; track $index) {
-                    <div class="options" (click)="selectOption(platform)">
-                        <input class="platform-{{platform}}" type="checkbox">
-                        <label class="platformLabel" for="platform">{{ platform }}</label>
-                    </div>
-                    }
-                </div>
-                }
     </div>
+    @if (dropDown) {
+    <div class="platformOptions">
+        @for (platform of filteredPlatforms; track $index) {
+        <div class="options">
+            <button (click)="selectOption(platform)" class="platformLabel" [class.selected]="selectedPlatform(platform)"
+                for="platform">{{ platform }}</button>
+        </div>
+        }
+    </div>
+    }
     <div class="upcoming-container">
         @if(contests().length > 0){
         <table class="contests-table">
             <thead>
                 <tr>
-                    <th>S. No</th>
-                    <th>Contest Name</th>
-                    <th>Platform</th>
-                    <th>Start Time</th>
-                    <th>Duration</th>
-                    <th>Action</th>
+                    <th>S. NO</th>
+                    <th>CONTEST NAME</th>
+                    <th>PLATFORM</th>
+                    <th>START TIME</th>
+                    <th>DURATION</th>
+                    <th>ACTION</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,7 +58,7 @@
                     <td class="contest-platform">{{ contest.resource.name.split('.')[0] }}</td>
                     <td class="contest-time">{{ contest.start }}</td>
                     <td class="contest-duration">{{ contest.duration/60 }} min</td>
-                    <td class="add-calender">Add To Calender</td>
+                    <td class="add-calendar">Add To calendar</td>
                 </tr>
                 }
             </tbody>
@@ -59,7 +68,7 @@
         <p>Loading Contests</p>
         }
         @else{
-        <p>Please search for contests to add to calender</p>
+        <p>Please search for contests to add to calendar</p>
         }
 
     </div>

@@ -112,5 +112,9 @@ export class Contests {
     return d.getTime();
   }
 
+  selectedPlatform(platform: string): boolean {
+    return this.selectedPlatforms.includes(platform + ".com") || this.selectedPlatforms.includes(platform + ".jp"); 
+  }
+
 
 }
