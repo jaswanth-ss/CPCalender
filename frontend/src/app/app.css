@@ -2,7 +2,6 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgb(17, 17, 17);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
@@ -18,7 +17,7 @@
 }
 
 .logo {
-  color: #ffffff;
+  color: #ffffff;;
   font-size: 1.25rem;
   font-weight: 600;
 }
@@ -46,5 +45,5 @@
 
 .navlinks a.active {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.18);
+  background: #ff782be6
 }

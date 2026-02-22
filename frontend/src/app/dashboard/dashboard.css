@@ -8,7 +8,6 @@
 }
 
 .welcome-card {
-  background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-radius: 18px;
@@ -31,19 +30,11 @@
 
 .welcome-subtitle {
   font-size: 1.1rem;
-  color: #cbd5f5;
+  color: #ffffffd0;
   margin-bottom: 14px;
 }
 
-.welcome-description {
-  font-size: 0.95rem;
-  line-height: 1.7;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.683);
-}
-
 .upcomingContests {
-  background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-radius: 18px;
@@ -101,6 +92,7 @@
   color: #f87171;
   margin-bottom: 12px;
 }
+
 
 .empty-text {
   color: rgba(255, 255, 255, 0.6);

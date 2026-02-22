@@ -1,75 +1,72 @@
-<div class="heading">
-    <p class="contest-subheading">Search for upcoming coding contests</p>
-</div>
-<div class="container">
-    <div class="search">
-        <form (ngSubmit)="onSearch()" class="formInp">
-            <div class="platformSearch" (blur)="dropDown = false">
-                <div class="searchInp">
-                    <label for="platform">PLATFORM</label>
-                    <input type="text" name="platform" id="platform" [(ngModel)]="searchInput" (input)="onInput()"
-                        (focus)="dropDown = true" autocomplete="off" placeholder="Type to filter">
-                </div>
-            </div>
+<div class="page contests-page">
+  <header class="page-header">
+    <h1 class="page-title">Contests</h1>
+    <p class="page-subtitle">Search by platform and date range</p>
+  </header>
 
-            <div class="dateSelect">
-                <div class="searchInp">
-                    <label for="startDate">START DATE</label>
-                    <input type="date" name="startDate" id="startDate" [(ngModel)]="startDate">
-                </div>
-                <div class="searchInp">
-                    <label for="endDate">END DATE</label>
-                    <input type="date" name="endDate" id="endDate" [(ngModel)]="endDate" [disabled]="startDate === ''"
-                        [min]="startDate">
-                </div>
-            </div>
-
-            <button type="submit" class="search-btn">Search</button>
-        </form>
-    </div>
-    @if (dropDown) {
-    <div class="platformOptions">
-        @for (platform of filteredPlatforms; track $index) {
-        <div class="options">
-            <button (click)="selectOption(platform)" class="platformLabel" [class.selected]="selectedPlatform(platform)"
-                for="platform">{{ platform }}</button>
-        </div>
+  <section class="filter-section">
+    <form (ngSubmit)="onSearch()" class="filter-form">
+      <div class="filter-group platformSearch" (blur)="dropDown = false">
+        <label for="platform">Platform</label>
+        <input type="text" id="platform" name="platform" [(ngModel)]="searchInput" (input)="onInput()" (focus)="dropDown = true" autocomplete="off" placeholder="Type to filter…">
+        @if (dropDown) {
+          <div class="filter-dropdown">
+            @for (platform of filteredPlatforms; track $index) {
+              <button type="button" class="filter-option" [class.selected]="selectedPlatform(platform)" (click)="selectOption(platform)">{{ platform }}</button>
+            }
+          </div>
         }
-    </div>
-    }
-    <div class="upcoming-container">
-        @if(contests().length > 0){
+      </div>
+      <div class="filter-group filter-dates">
+        <label for="startDate">Start date</label>
+        <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate">
+      </div>
+      <div class="filter-group filter-dates">
+        <label for="endDate">End date</label>
+        <input type="date" id="endDate" name="endDate" [(ngModel)]="endDate" [disabled]="startDate === ''" [min]="startDate">
+      </div>
+      <div class="filter-submit">
+        <button type="submit" class="btn btn-primary search-btn">Search</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="results-section">
+    @if (contests().length > 0) {
+      <div class="results-wrap">
         <table class="contests-table">
-            <thead>
-                <tr>
-                    <th>S. NO</th>
-                    <th>CONTEST NAME</th>
-                    <th>PLATFORM</th>
-                    <th>START TIME</th>
-                    <th>DURATION</th>
-                    <th>ACTION</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for(contest of contests(); track contest.id; let i = $index){
-                <tr>
-                    <td class="sno"> {{ i+1 }}</td>
-                    <td class="contest-name"> <a [href]="contest.href" target="_blank">{{ contest.event }}</a></td>
-                    <td class="contest-platform">{{ contest.resource.name.split('.')[0] }}</td>
-                    <td class="contest-time">{{ contest.start }}</td>
-                    <td class="contest-duration">{{ contest.duration/60 }} min</td>
-                    <td class="add-calendar">Add To calendar</td>
-                </tr>
-                }
-            </tbody>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Contest</th>
+              <th>Platform</th>
+              <th>Start</th>
+              <th>Duration</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (contest of contests(); track contest.id; let i = $index) {
+              <tr>
+                <td class="sno">{{ i + 1 }}</td>
+                <td class="contest-name"><a [href]="contest.href" target="_blank">{{ contest.event }}</a></td>
+                <td class="contest-platform">{{ contest.resource.name.split('.')[0] }}</td>
+                <td class="contest-time">{{ contest.start }}</td>
+                <td class="contest-duration">{{ contest.duration / 60 }} min</td>
+                <td><button type="button" class="add-calendar">Add to calendar</button></td>
+              </tr>
+            }
+          </tbody>
         </table>
-        }
-        @else if(isLoading()){
-        <p>Loading Contests</p>
-        }
-        @else{
-        <p>Please search for contests to add to calendar</p>
-        }
-
-    </div>
+      </div>
+    } @else if (isLoading()) {
+      <div class="state-box state-empty">
+        <p class="state-message">Loading contests…</p>
+      </div>
+    } @else {
+      <div class="state-box state-empty">
+        <p class="state-message">Search by platform and date range to see contests.</p>
+      </div>
+    }
+  </section>
 </div>

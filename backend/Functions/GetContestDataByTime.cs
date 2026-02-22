@@ -21,7 +21,7 @@ namespace CPContest
         }
 
         [Function("GetContestDataByTime")]
-        public async Task Run([TimerTrigger("0 9 7 * * *")] TimerInfo myTimer)
+        public async Task Run([TimerTrigger("0 0 0 */3 * *")] TimerInfo myTimer)
         {
             _logger.LogInformation(
                 "Function execution started at: {time}",

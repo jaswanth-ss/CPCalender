@@ -3,10 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { ContestModel, platformsArray } from '../contest.model';
 import { ContestService } from '../service/contest.service';
 import { map } from 'rxjs';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-contests',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './contests.html',
   styleUrl: './contests.css',
 })
@@ -95,7 +96,7 @@ export class Contests {
   @HostListener('document:click', ['$event'])
   clickOutside(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (!target.closest('.platformSearch')) {
+    if (!target.closest('.platformSearch') && !target.closest('.platformLabel')) {
       this.dropDown = false;
       this.filteredPlatforms = this.platforms;
     }

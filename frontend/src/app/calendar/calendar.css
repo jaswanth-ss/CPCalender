@@ -6,6 +6,7 @@
     margin: 1%;
 }
 .calendar-section{
+    background-color: var(--bg-elevated);
     border: 0.75px solid white;
     border-radius: 0.5rem;
 }
@@ -101,11 +102,13 @@
 .platform-leetcode{
     background-color: #e79f33;
     color: #000;
+    border: 0.01rem solid white;
 }
 
 .platform-atcoder{
     background-color: #090909;
     color: #fff;
+    border: 0.01rem solid white;
 }
 
 .platform-topcoder{
@@ -117,8 +120,17 @@
 }
 
 .legend-items{
-    display: flex;
+    display: grid;
     flex-direction: row;
+    grid-template-columns:repeat(3,1fr);
+}
+
+.legend-section{
+    background-color: var(--bg-elevated);
+    margin: 0.5%;
+    margin-top: 2%;
+    border: 1px solid var(--border);;
+    border-radius: 0.25rem;
 }
 
 .legend-item {
