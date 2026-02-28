@@ -7,7 +7,7 @@ import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-contests',
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule],
   templateUrl: './contests.html',
   styleUrl: './contests.css',
 })

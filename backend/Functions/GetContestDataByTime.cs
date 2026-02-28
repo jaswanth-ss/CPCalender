@@ -32,7 +32,7 @@ namespace CPContest
                 "codeforces.com,codechef.com,leetcode.com,atcoder.jp,topcoder.com,hackerrank.com";
 
             string from = DateTime.UtcNow.Date.ToString("yyyy-MM-dd");
-            string to   = DateTime.UtcNow.Date.AddDays(30).ToString("yyyy-MM-dd");
+            string to   = DateTime.UtcNow.Date.AddDays(34).ToString("yyyy-MM-dd");
 
             string username = Environment.GetEnvironmentVariable("CLIST_USERNAME")!;
             string apiKey   = Environment.GetEnvironmentVariable("CLIST_API_KEY")!;
