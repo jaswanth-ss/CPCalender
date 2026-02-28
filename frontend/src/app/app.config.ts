@@ -22,7 +22,7 @@ export const msalConfig: Configuration = {
   auth: {
     clientId: environment.azureAd.clientId,
     authority: environment.azureAd.authority,
-    redirectUri: environment.azureAd.redirectUri,
+    redirectUri: `${window.location.origin}/auth`,
     postLogoutRedirectUri: '/auth',
   },
   cache: {
